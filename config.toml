@@ -1,0 +1,36 @@
+baseURL = "//brianp.de/"
+languageCode = "en-us"
+title = "Brian Pfretzschner"
+theme = "hermit"
+
+[author]
+  name = "Brian Pfretzschner"
+
+[params]
+  dateform = "Jan 2, 2006"
+  dateformShort = "Jan 2"
+  dateformNum = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  homeSubtitle = "Software Developer & Electronics Enthusiast"
+  footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+  
+  relatedPosts = true
+
+  code_copy_button = false
+
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/Pfarrer"
+
+[menu]
+
+  [[menu.main]]
+    name = "Posts"
+    url = "posts/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About"
+    url = "about/"
+    weight = 20
