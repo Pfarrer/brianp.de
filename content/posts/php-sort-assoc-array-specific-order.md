@@ -1,5 +1,5 @@
 +++
-title = "PHP: Sort assoc array in a very specific order"
+title = "PHP: Sort associative array in a specific order given by a second array"
 tags = [
     "php",
     "sort",
@@ -8,7 +8,7 @@ date = "2013-09-27"
 +++
 
 If you have to sort a associative array in a very specific order that cannot be described easily with a lambda,
-PHP's sort functions do not help a lot. For example, a second array contains the keys in order.
+PHP's sort functions do not help a lot. In this example, a second array contains the keys in the required order.
 A nice and easy way to do the same thing with just a few lines of code:
 
 ```js

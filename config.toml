@@ -19,9 +19,12 @@ theme = "hermit"
 
   code_copy_button = false
 
-  [[params.social]]
-    name = "github"
-    url = "https://github.com/Pfarrer"
+  customCSS = ["css/custom.css"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [menu]
 
