@@ -33,10 +33,10 @@ theme = "hermit"
     url = "posts/"
     weight = 10
   
-  [[menu.main]]
-    name = "Projects"
-    url = "projects/"
-    weight = 10
+#  [[menu.main]]
+#    name = "Projects"
+#    url = "projects/"
+#    weight = 10
 
   [[menu.main]]
     name = "About"
