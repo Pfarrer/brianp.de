@@ -2,6 +2,7 @@ baseURL = "https://brianp.de/"
 languageCode = "en-us"
 title = "Brian Pfretzschner"
 theme = "hermit"
+enableEmoji = true
 
 [author]
   name = "Brian Pfretzschner"
