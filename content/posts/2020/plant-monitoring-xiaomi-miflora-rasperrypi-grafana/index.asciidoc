@@ -1,0 +1,208 @@
++++
+title = "Plant Monitoring with Xiaomi Mi Flora and a Raspberry Pi 4"
+date = "2020-06-29"
+tags = [
+    "plant",
+    "monitoring",
+    "smarthome",
+    "xiaomi",
+    "miflora",
+    "vegtrug",
+    "rasperrypi",
+    "mqtt",
+    "grafana",
+    "influxdb",
+    "docker",
+]
++++
+
+{{< load-photoswipe >}}
+
+== Hardware
+
+Xiaomi offers a simple and cheap flower sensor that can measure 4 different properties:
+soil moisture & fertility, light and temperature. You can find more details here:
+https://xiaomi-mi.com/sockets-and-sensors/xiaomi-huahuacaocao-flower-care-smart-monitor/[^]
+
+The https://play.google.com/store/apps/details?id=com.huahuacaocao.vegtrug[VegTrug Grow Care^] app is compatible to these sensors and can connect via Bluetooth.
+It shows the current levels for the 4 available properties plus the battery level.
+The app even keeps historic data to show the trend over the period of a day, week or month.
+
+{{< gallery >}}
+{{< figure src="./vegtrug-app/vegtrug-overview.jpg" >}}
+{{< figure src="./vegtrug-app/vegtrug-report.jpg" >}}
+{{< /gallery >}}
+
+By design, an App based solution has a few deficits, for instance, no monitoring is possible when
+the smartphone is not in the range of any sensor. Therefore, alerting is not always possible except
+when being near the plant, which kind of contradicts the purpose of automatic alerts. Maybe for that
+reason, the VegTrug Grow Care app has no such feature.
+
+== Idea
+
+Utilize some kind of local server to
+
+- frequently connect to the Mi Flora sensors and collect the current sensor values,
+- process and store these values indefinitely,
+- alert if a predefined threshold is met,
+- offer a flexible UI to _play_ with stored data.
+
+As the local server I decided to use a _Raspberry Pi 4_ because it comes with integrated
+Bluetooth and WLAN support. Also, it offers more than enough computing power and storage for this
+purpose while still being cost effective and energy efficient.
+
+== Code
+
+=== miflora-mqtt-daemon
+
+Fortunately, https://github.com/ThomDietrich/miflora-mqtt-daemon[miflora-mqtt-daemon^] is great project
+that is capable of connecting to multiple Xiaomi Mi Flora sensors to retrieve their current measurements
+and publish the result to any MQTT server. I found this project very easy to use and to work very well.
+Especially the README is great and very helpful.
+
+=== Mosquitto
+
+As MQTT server, I decided to use _Eclipse Mosquitto_. It is easy to use and required no configuration
+for this simple use case. It acts as a message bus to which the miflora-mqtt-daemon can easily deliver the
+values it retrived. Mosquitto will not store any data. If there is no consumer available, the messages
+will be lost.
+
+=== Telegraf
+
+Telegraf is used to bridge the gap between Mosquitto as the message bus and InfluxDB as persistant storage.
+This tool is far more powerful than what I use it for in this project.
+
+My Telegraf configration is quite simple, it only defines MQTT as input and InfluxDB as output.
+Comments and other not relevant settings are not shown for the sake of brevity:
+
+[source, toml]
+....
+[[inputs.mqtt_consumer]]
+  servers = ["tcp://mosquitto:1883"]
+  topics = [
+    "miflora/#"
+  ]
+
+  client_id = "telegraf"
+  data_format = "json"
+
+[[outputs.influxdb]]
+  urls = ["http://influxdb:8086"]
+  database = "miflora"
+....
+
+=== InfluxDB
+
+InfluxDB is a time series database that works very well for use cases like this. It is often found in IoT projects,
+therefore I also used it here.
+
+All the configuration that is required are the three environment variables set in the docker compose file shown below,
+see <<Docker Compose>>.
+
+With the components covered so far, the system is already capable of recording and storing the measured values.
+
+=== Grafana
+
+Grafana is a great tool to query data from different sources, such as InfluxDB. It allows to easily _play_ with the data, different visualizations and transformations. Furthermore, it allows to define alerts, also based on calculations and transformations on the raw data.
+
+As describes in the <<Result>> section, Grafana helped me a lot to understand the different properties and to find an individual combination of transformations, visualizations and threshold for each sensor/plant.
+
+=== Docker Compose
+
+All the above mentioned services are defined in a docker-compose file with the exception of the miflora-mqtt-daemon:
+
+[source, yaml]
+....
+version: '2'
+services:
+
+    mosquitto:
+        image: eclipse-mosquitto
+        container_name: mosquitto
+        restart: always
+        ports:
+            - '1883:1883'
+            - '9001:9001'
+        volumes:
+            - mosquitto-storage:/mosquitto
+
+    influxdb:
+        image: influxdb:latest
+        container_name: influxdb
+        restart: always
+        ports:
+            - '8086:8086'
+        volumes:
+            - influxdb-storage:/var/lib/influxdb
+        environment:
+            - INFLUXDB_DB=miflora
+            - INFLUXDB_ADMIN_USER=admin
+            - INFLUXDB_ADMIN_PASSWORD=changeme
+
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        restart: always
+        ports:
+            - '3000:3000'
+        volumes:
+            - grafana-storage:/var/lib/grafana
+        depends_on:
+            - influxdb
+        environment:
+            - GF_SECURITY_ADMIN_USER=admin
+            - GF_SECURITY_ADMIN_PASSWORD=changeme
+
+    telegraf:
+        image: telegraf
+        container_name: telegraf
+        restart: always
+        volumes:
+            - /opt/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+        depends_on:
+            - influxdb
+            - mosquitto
+
+volumes:
+    mosquitto-storage: {}
+    influxdb-storage: {}
+    grafana-storage: {}
+....
+
+Do not forget to set proper passwords!
+
+## Results
+
+At the time of writing this, the described setup is active for about 60 consecutive days without interruption: 3 sensors that are queried every 10 minutes to retrieve 5 numeric properties per sensor: temperature, light, moisture, conductivity and battery level. The three plants I selected for monitoring are:
+
+- `chili` - A young chili plant that was located on my balcony in a balcony trough.
+- `vine` - A vine plant that was also located on the balcony, but more protected from wind and rain because it is covered by a small roof.
+- `basil` - A typical basil plant located next to the kitchen window. 
+
+### Disk Space
+
+The disk space required to store the collected data with InfluxDB is negligible, less than 30 MB.
+
+After thinking about this for a second it is not so surprising anymore. Although 60 days seem like a long period, the amount of data collected is indeed not too much. If we assume that each measurement taken is stored as an Integer with 4 bytes we can calculate the number of bytes required to store each individual measurement: +
+3 sensors * 5 measured properties * 4 bytes * 6 measurements per hour * 24 hours per day * 60 days = 518.400 bytes or roughly 0.5 MB. Of course, this rough estimation completely ignores the timestamp that needs to be stored with each value.
+
+### Light & Temperature
+
+Light and temperature readings seems to be quite accurate and reliable. In fact, the first alert I setup was on the temperature of the chili plant. This chili plant appeared to not like the cold north European weather too much, since the temperature went below 5 °C during some nights. Therefore, I decided to alert myself whenever the chili sensor reads a temperature below 10 °C. This worked very well and reliable. You can actually see that I kept the balcony trough indoors even during daytime for a while because it did not get too warm for a few days (see the second picture).
+
+Measured temperatures value strongly vary when the sensors happens to be in direct sunlight. I guess this is due to the sensor casing heating up. Therefore, the temperature spikes do not always reflect the actual air temperature. Especially check the data for May, 12. This was a very cloudy day with no direct sunlight. On this day, the measured temperature barely exceeds 20 °C while on other days before and after that, the temperature easily exceeds 30 °C.
+
+{{< gallery >}}
+{{< figure src="./grafana/all_temp+light_60d.jpg" caption="Light and Temperature readings of the entire dataset (60 days)" >}}
+{{< figure src="./grafana/all_temp+light_may.jpg" caption="Light and Temperature readings for a 11 day period in May. May, 11. was a very cloudy day with no direct sunlight." >}}
+{{< /gallery >}}
+
+### Conductivity & Moisture
+
+The conductivity and moisture readings did not convince me immediately.
+
+{{< gallery >}}
+{{< figure src="./grafana/all_condu+moist_60d.jpg" >}}
+{{< /gallery >}}
+
+### Battery

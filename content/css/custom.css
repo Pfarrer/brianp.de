@@ -1,4 +1,9 @@
 .content img.inline-icon {
-    display: inline-block;
-    height: 1em;
+  display: inline-block;
+  height: 1em;
+}
+
+/* Allow tags in post to line break if there are too many tags */
+.post-info > p:nth-child(1) {
+  line-break: anywhere;
 }

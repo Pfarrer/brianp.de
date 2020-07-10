@@ -8,10 +8,10 @@ enableEmoji = true
   name = "Brian Pfretzschner"
 
 [params]
-  dateform = "Jan 2, 2006"
-  dateformShort = "Jan 2"
+  dateform = "02.01.2006"
+  dateformShort = "2. January"
   dateformNum = "2006-01-02"
-  dateformNumTime = "2006-01-02 15:04 -0700"
+  dateformNumTime = "2006-01-02"
 
   homeSubtitle = "Software Developer & Electronics Enthusiast"
   footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
@@ -34,6 +34,12 @@ enableEmoji = true
     url = "posts/"
     weight = 10
   
+
+  [[menu.main]]
+    name = "Quotes"
+    url = "quotes"
+    weight = 20
+
 #  [[menu.main]]
 #    name = "Projects"
 #    url = "projects/"
@@ -42,4 +48,4 @@ enableEmoji = true
   [[menu.main]]
     name = "About"
     url = "about/"
-    weight = 20
+    weight = 30

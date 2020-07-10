@@ -1,5 +1,10 @@
 +++
 title = "Example Measurements of a Capacitive Soil Moisture Sensor"
+tags = [
+    "plant",
+    "smarthome",
+    "iot",
+]
 date = "2020-06-02"
 +++
 
