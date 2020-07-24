@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description"
+        content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }} ">
+    <link rel="canonical" href="{{ .Permalink }}" />
+
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+
+    {{ if in (string .Site.BaseURL) "localhost" }}
+    {{ $css := resources.Get "css/bootstrap.css" -}}
+    <link rel="stylesheet" href="{{ $css.Permalink }}">
+
+    {{ $js := resources.Get "js/bootstrap.js" -}}
+    <script src="{{ $js.Permalink }}"></script>
+    {{ else }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    {{ end }}
+
+    {{ $styleScss := resources.Get "css/style.scss" -}}
+    {{ $style := $styleScss | resources.ToCSS }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+
+    <title>{{ block "title" . }}
+        {{ if not .IsHome }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}
+        {{ end }}</title>
+</head>
+
+<body class="bp-background-color">
+    {{- partial "header.html" . -}}
+    <div class="container bp-foreground-color">
+        <main>
+            {{- block "main" . }}{{- end }}
+        </main>
+        {{- partial "footer.html" . -}}
+    </div>
+</body>
+
+</html>

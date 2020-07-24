@@ -1,13 +1,14 @@
 baseURL = "https://brianp.de/"
 languageCode = "en-us"
 title = "Brian Pfretzschner"
-theme = "hermit"
+theme = "brianp"
 enableEmoji = true
 
 [author]
   name = "Brian Pfretzschner"
 
 [params]
+  description = "Personal home page and blog of Brian Pfretzschner"
   dateform = "02.01.2006"
   dateformShort = "2. January"
   dateformNum = "2006-01-02"
@@ -33,19 +34,18 @@ enableEmoji = true
     name = "Posts"
     url = "posts/"
     weight = 10
-  
+
+  [[menu.main]]
+    name = "Projects"
+    url = "projects/"
+    weight = 20
 
   [[menu.main]]
     name = "Quotes"
     url = "quotes"
-    weight = 20
-
-#  [[menu.main]]
-#    name = "Projects"
-#    url = "projects/"
-#    weight = 10
+    weight = 30
 
   [[menu.main]]
     name = "About"
     url = "about/"
-    weight = 30
+    weight = 40

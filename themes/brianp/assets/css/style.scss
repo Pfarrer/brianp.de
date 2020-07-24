@@ -1,0 +1,19 @@
+$color-bg: #2b2a2c;
+$color-fg: #e0dfe0;
+
+.bp-background-color {
+    background-color: $color-bg;
+}
+
+.bp-foreground-color {
+    background-color: $color-fg;
+}
+
+pre {
+    background-color: $color-fg;
+    padding: 1em;
+}
+
+.tag-cloud .tag {
+    margin: 0.1em;
+}
