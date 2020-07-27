@@ -7,3 +7,10 @@
 .post-info > p:nth-child(1) {
   line-break: anywhere;
 }
+
+.gallery a {
+  box-shadow: none;
+}
+.gallery a:hover {
+  box-shadow: none;
+}

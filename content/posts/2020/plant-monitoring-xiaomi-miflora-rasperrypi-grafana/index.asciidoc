@@ -1,6 +1,6 @@
 +++
 title = "Plant Monitoring with Xiaomi Mi Flora and a Raspberry Pi 4"
-date = "2020-06-29"
+date = "2020-07-26"
 tags = [
     "plant",
     "monitoring",
@@ -33,7 +33,7 @@ The app even keeps historic data to show the trend over the period of a day, wee
 {{< figure src="./vegtrug-app/vegtrug-report.jpg" >}}
 {{< /gallery >}}
 
-By design, an App based solution has a few deficits, for instance, no monitoring is possible when
+By design, an App-based solution has a few deficits, for instance, no monitoring is possible when
 the smartphone is not in the range of any sensor. Therefore, alerting is not always possible except
 when being near the plant, which kind of contradicts the purpose of automatic alerts. Maybe for that
 reason, the VegTrug Grow Care app has no such feature.
@@ -47,7 +47,7 @@ Utilize some kind of local server to
 - alert if a predefined threshold is met,
 - offer a flexible UI to _play_ with stored data.
 
-As the local server I decided to use a _Raspberry Pi 4_ because it comes with integrated
+As the local server, I decided to use a _Raspberry Pi 4_ because it comes with integrated
 Bluetooth and WLAN support. Also, it offers more than enough computing power and storage for this
 purpose while still being cost effective and energy efficient.
 
@@ -55,24 +55,24 @@ purpose while still being cost effective and energy efficient.
 
 === miflora-mqtt-daemon
 
-Fortunately, https://github.com/ThomDietrich/miflora-mqtt-daemon[miflora-mqtt-daemon^] is great project
+Fortunately, https://github.com/ThomDietrich/miflora-mqtt-daemon[miflora-mqtt-daemon^] is a great project
 that is capable of connecting to multiple Xiaomi Mi Flora sensors to retrieve their current measurements
 and publish the result to any MQTT server. I found this project very easy to use and to work very well.
 Especially the README is great and very helpful.
 
 === Mosquitto
 
-As MQTT server, I decided to use _Eclipse Mosquitto_. It is easy to use and required no configuration
+As the MQTT server, I decided to use _Eclipse Mosquitto_. It is easy to use and required no configuration
 for this simple use case. It acts as a message bus to which the miflora-mqtt-daemon can easily deliver the
-values it retrived. Mosquitto will not store any data. If there is no consumer available, the messages
+values it retrieved. Mosquitto will not store any data. If there is no consumer available, the messages
 will be lost.
 
 === Telegraf
 
-Telegraf is used to bridge the gap between Mosquitto as the message bus and InfluxDB as persistant storage.
+Telegraf is used to bridge the gap between Mosquitto as the message bus and InfluxDB as persistent storage.
 This tool is far more powerful than what I use it for in this project.
 
-My Telegraf configration is quite simple, it only defines MQTT as input and InfluxDB as output.
+My Telegraf configuration is quite simple, it only defines MQTT as input and InfluxDB as output.
 Comments and other not relevant settings are not shown for the sake of brevity:
 
 [source, toml]
@@ -96,20 +96,20 @@ Comments and other not relevant settings are not shown for the sake of brevity:
 InfluxDB is a time series database that works very well for use cases like this. It is often found in IoT projects,
 therefore I also used it here.
 
-All the configuration that is required are the three environment variables set in the docker compose file shown below,
+All the configuration that is required are the three environment variables set in the `docker-compose` file shown below,
 see <<Docker Compose>>.
 
 With the components covered so far, the system is already capable of recording and storing the measured values.
 
 === Grafana
 
-Grafana is a great tool to query data from different sources, such as InfluxDB. It allows to easily _play_ with the data, different visualizations and transformations. Furthermore, it allows to define alerts, also based on calculations and transformations on the raw data.
+Grafana is a great tool to query data from different sources, such as InfluxDB. It allows to easily _play_ with the data, different visualizations, and transformations. Furthermore, alerts can be defined, based on calculations and transformations on the raw data.
 
-As describes in the <<Result>> section, Grafana helped me a lot to understand the different properties and to find an individual combination of transformations, visualizations and threshold for each sensor/plant.
+As describes in the <<Result>> section, Grafana helped a lot to understand the different properties and to find an individual combination of transformations, visualizations, and a threshold for each sensor/plant.
 
 === Docker Compose
 
-All the above mentioned services are defined in a docker-compose file with the exception of the miflora-mqtt-daemon:
+All services mentioned above are defined in a `docker-compose` file, except for the miflora-mqtt-daemon:
 
 [source, yaml]
 ....
@@ -173,7 +173,7 @@ Do not forget to set proper passwords!
 
 ## Results
 
-At the time of writing this, the described setup is active for about 60 consecutive days without interruption: 3 sensors that are queried every 10 minutes to retrieve 5 numeric properties per sensor: temperature, light, moisture, conductivity and battery level. The three plants I selected for monitoring are:
+At the time of writing this, the described setup is active for about 60 consecutive days without interruption: 3 sensors that are queried every 10 minutes to retrieve 5 numeric properties per sensor: temperature, light, moisture, conductivity, and battery level. The three plants I selected for monitoring are:
 
 - `chili` - A young chili plant that was located on my balcony in a balcony trough.
 - `vine` - A vine plant that was also located on the balcony, but more protected from wind and rain because it is covered by a small roof.
@@ -188,21 +188,31 @@ After thinking about this for a second it is not so surprising anymore. Although
 
 ### Light & Temperature
 
-Light and temperature readings seems to be quite accurate and reliable. In fact, the first alert I setup was on the temperature of the chili plant. This chili plant appeared to not like the cold north European weather too much, since the temperature went below 5 °C during some nights. Therefore, I decided to alert myself whenever the chili sensor reads a temperature below 10 °C. This worked very well and reliable. You can actually see that I kept the balcony trough indoors even during daytime for a while because it did not get too warm for a few days (see the second picture).
+Light and temperature readings seem to be quite accurate and reliable. The first alert I created was on the temperature of the chili plant. This chili plant appeared to not like the cold north European weather too much. Since the temperature went below 5 °C in some nights. Therefore, I decided to alert myself whenever the chili sensor reads a temperature below 10 °C. This worked very well and reliable. You can see that I kept the balcony trough indoors even during the daytime for a while because it did not get too warm for a few days (see the second picture).
 
-Measured temperatures value strongly vary when the sensors happens to be in direct sunlight. I guess this is due to the sensor casing heating up. Therefore, the temperature spikes do not always reflect the actual air temperature. Especially check the data for May, 12. This was a very cloudy day with no direct sunlight. On this day, the measured temperature barely exceeds 20 °C while on other days before and after that, the temperature easily exceeds 30 °C.
+Measured temperatures value strongly vary when the sensors happen to be in direct sunlight. I guess this is due to the sensor casing heating up. Therefore, the temperature spikes do not always reflect the actual air temperature. Especially check the data for May, 12. This was a very cloudy day with no direct sunlight. On this day, the measured temperature barely exceeds 20 °C while on other days before and after that, the temperature easily exceeds 30 °C.
 
 {{< gallery >}}
-{{< figure src="./grafana/all_temp+light_60d.jpg" caption="Light and Temperature readings of the entire dataset (60 days)" >}}
+{{< figure src="./grafana/all_temp+light_60d.jpg" caption="Light and Temperature readings (60 days)" >}}
 {{< figure src="./grafana/all_temp+light_may.jpg" caption="Light and Temperature readings for a 11 day period in May. May, 11. was a very cloudy day with no direct sunlight." >}}
 {{< /gallery >}}
 
 ### Conductivity & Moisture
 
-The conductivity and moisture readings did not convince me immediately.
+The conductivity and moisture readings did not convince me immediately. The moisture sensor readings do not directly respond when a plant was watered. See the second picture in the following set. The plant was not watered for a few days. In the shown period, it was watered first on the 19th in the afternoon. Both, moisture and conductivity readings respond immediately. On the next day, the plant was watered once again at lunchtime. This is only reflected by the conductivity reading. I have no idea why the moisture reading drops at that time.
+
+The third picture in the following set shows my current and correctly working water level monitoring based on the conductivity level. Since the conductivity reading varies over the day, the alerting  is based on a transformation of the raw data. I found the moving average over a 30 hours period to be quite stable, but still responsive enough. This transformed value is currently the base for my alerts.
 
 {{< gallery >}}
-{{< figure src="./grafana/all_condu+moist_60d.jpg" >}}
+{{< figure src="./grafana/all_condu+moist_60d.jpg" caption="Moisture and Conductivity readings (60 days)" >}}
+{{< figure src="./grafana/vine_condu+moist_7d.jpg" caption="Moisture and Conductivity of the Vine plant (7 day period). Watering happened on 19th in the afternoon, 20th and 22nd at lunchtime" >}}
+{{< figure src="./grafana/vine+chili_condu_7d.jpg" caption="Moisture of the Vine and Chili plant (7 day period). Low water level alerts were triggered at the vertical red lines, the water level recovered at the vertical green lines." >}}
 {{< /gallery >}}
 
 ### Battery
+
+The period shown in this image is slightly larger, it is about 80 days long. The state of charge reading of the battery in the Vine sensor fluctuates the most among my three sensors. I expect this to be due to the Vine plants outdoor location, mostly unprotected from low temperature (especially mid of May). I added the temperature values of the same sensor to the attached chart to showing the relationship between temperature and changes in the state of charge. Especially at the beginning of the shown period, high or low temperatures line up very well with battery value changes.
+
+{{< gallery >}}
+{{< figure src="./grafana/vine_battery+temp_80d.jpg" caption="Battery (turquoise) and Temperature (purple) readings of the Vine plant (80 days period)" >}}
+{{< /gallery >}}
