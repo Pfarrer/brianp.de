@@ -1,6 +1,6 @@
 +++
 title = "Replacing a CR2032 Battery with a 3 V Solar Panel and a Super Capacitor"
-date = "2020-07-24"
+date = "2020-08-03"
 tags = [
     "CR2032",
     "solar",
@@ -10,4 +10,6 @@ tags = [
 draft = true
 +++
 
-image::plot.png[]
+
+image::discharge/plot.png[]
+image::charge/plot.png[]
