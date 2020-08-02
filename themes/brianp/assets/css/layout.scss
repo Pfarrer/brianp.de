@@ -1,0 +1,83 @@
+$width-body-lg: 960px;
+$width-body-sm: 800px;
+$width-main-lg: 640px;
+$width-nav-lg: 160px;
+$width-aside-lg: 160px;
+
+body {
+    display: flex;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    max-width: $width-body-lg;
+    background-color: $color-bg;
+
+    // header {
+    //     background-color: yellowgreen;
+    // }
+    // nav {
+    //     background-color: turquoise;
+    // }
+    // aside {
+    //     background-color: darkgoldenrod;
+    // }
+    // main {
+    //     background-color: royalblue;
+    // }
+    // footer {
+    //     background-color: rebeccapurple;
+    // }
+
+    main {
+        h1, h2, h3 {
+            margin: 1rem;
+        }
+        p {
+            margin: 2rem;
+            
+            img {
+                margin: 0 -2rem;
+                width: $width-main-lg;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $width-body-sm) {
+    nav, main, header, aside, footer {
+        flex: 0 0 100%;
+    }
+}
+
+
+@media only screen and (min-width: $width-body-sm) and (max-width: $width-body-lg) {
+    nav {
+        flex: 1 0 $width-nav-lg;
+    }
+    main {
+        flex: 0 0 $width-main-lg;
+    }
+    header, aside, footer {
+        flex: 0 0 100%;
+    }
+}
+
+@media only screen and (min-width: $width-body-lg) {
+    nav, aside {
+        flex: 1 0 $width-nav-lg;
+    }
+    main {
+        flex: 0 0 $width-main-lg;
+    }
+    header, footer {
+        flex: 0 0 100%;
+    }
+}

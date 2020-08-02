@@ -1,0 +1,9 @@
+{{ .TableOfContents }}
+
+<h3>Tags</h3>
+
+{{- with .Params.tags }}
+{{- range . -}}
+<span class="tag"><a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a></span><br>
+{{- end }}
+{{- end }}

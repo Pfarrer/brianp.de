@@ -1,0 +1,10 @@
+nav {
+    display: flex;
+    flex-direction: column;
+
+    .nav-link {
+        font-size: 1.2rem;
+        text-align: right;
+        padding-top: 1rem;
+    }
+}
