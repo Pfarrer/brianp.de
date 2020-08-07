@@ -16,7 +16,7 @@ $source_array = array('elem1' => 1, 'elem2' => 2, 'elem3' => 3, 'elem4' => 4);
 $sort_order = array('elem1', 'elem4', 'elem2', 'elem3');
 ```
 
-The first array `$source_array` is supposed to be the array that sould be sorted.
+The first array `$source_array` is supposed to be the array that should be sorted.
 The second array `$sort_order` specifies the required order by listing the elements as they should be arranged.
 
 To sort the array, the internal functions `array_fill_keys` and `array_merge` are quite helpful:
