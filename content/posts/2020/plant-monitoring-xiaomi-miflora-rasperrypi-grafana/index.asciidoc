@@ -18,7 +18,9 @@ tags = [
 
 {{< load-photoswipe >}}
 
-In the following article, I am going to describe my motivation for automated plant monitoring and I will explain my final system and results in detail. 
+In the following article, I am going to describe my motivation for automated plant monitoring and I will explain my final system and results in detail.
+
+If you do not care about the details, jump straight to the <<Results>>.
 
 == Hardware
 
@@ -93,9 +95,9 @@ With the components covered so far, the system is already capable of recording a
 
 === Grafana
 
-Grafana is a great tool to query data from different sources, such as InfluxDB. It allows to easily _play_ with the data, different visualizations, and transformations. Furthermore, alerts can be defined on the the raw data or based on calculations and transformations.
+Grafana is a great tool to query data from different sources, such as InfluxDB. It allows to easily _play_ with the data, different visualizations, and transformations. Furthermore, alerts can be defined on the raw data or based on calculations and transformations.
 
-As describes in the <<Result>> section, Grafana helped a lot to understand the different properties and to find an individual combination of transformations, visualizations, and a threshold for each sensor/plant.
+As describes in the <<Results>> section, Grafana helped a lot to understand the different properties and to find an individual combination of transformations, visualizations, and a threshold for each sensor/plant.
 
 === Docker Compose
 
@@ -206,3 +208,5 @@ The period shown in this image is slightly larger, it is about 80 days long. The
 {{< gallery >}}
 {{< figure src="./grafana/vine_battery+temp_80d.jpg" caption="Battery (turquoise) and Temperature (purple) readings of the Vine plant (80 days period)" >}}
 {{< /gallery >}}
+
+// Please also see my follow up post on replacing the CR2032 battery with a solar panel and a super capacitor: {{< ref "example-measurement-moisture-sensor" >}}[etst]
