@@ -2,3 +2,21 @@
 <h1>{{ .Title }}</h1>
 {{ .Content }}
 {{ end }}
+
+{{ define "aside" }}
+<h3>Contents</h3>
+
+{{ .TableOfContents }}
+
+<h3>Tags</h3>
+
+{{- with .Params.tags }}
+{{- range . -}}
+<span class="tag"><a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a></span><br>
+{{- end }}
+{{- end }}
+
+<h3>Info</h3>
+
+<span class="post-day">Published: {{ .Date.Format .Site.Params.dateform }}</span>
+{{ end }}

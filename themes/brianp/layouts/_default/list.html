@@ -8,12 +8,10 @@
     <ul class="posts-list">
         {{- range .Pages }}
         <li class="post-item">
-            <a href="{{.Permalink}}">
-                <span class="post-title">{{.Title}}</span>
-                <span class="post-day">{{ .Date.Format .Site.Params.dateformShort }}</span>
-                <span class="post-ReadingTime">{{ .ReadingTime }}</span>
-                <span class="teaser">{{.Summary}}</span>
-            </a>
+
+            <a href="{{.Permalink}}" class="post-title">{{.Title}}</a>
+            <p class="teaser">{{.Summary}}</p>
+
         </li>
         {{- end }}
     </ul>

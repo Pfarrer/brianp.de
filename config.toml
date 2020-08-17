@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "Brian Pfretzschner"
 theme = "brianp"
 enableEmoji = true
+enableGitInfo = true
 
 [author]
   name = "Brian Pfretzschner"
@@ -13,15 +14,6 @@ enableEmoji = true
   dateformShort = "2. January"
   dateformNum = "2006-01-02"
   dateformNumTime = "2006-01-02"
-
-  homeSubtitle = "Software Developer & Electronics Enthusiast"
-  footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-  
-  relatedPosts = true
-
-  code_copy_button = false
-
-  customCSS = ["css/custom.css"]
 
 [markup]
   [markup.goldmark]
