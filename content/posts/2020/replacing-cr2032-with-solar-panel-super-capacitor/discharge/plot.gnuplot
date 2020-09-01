@@ -6,7 +6,7 @@ set format x "%d. \n %H:%M"
 set timefmt "%d-%H:%M"
 
 show style line
-set ylabel 'Supercapacitor Voltage'
+set ylabel 'Super Capacitor Voltage'
 set xlabel 'Day and Time'
 
 set style line 1 lt rgb "blue" lw 1 pt 2

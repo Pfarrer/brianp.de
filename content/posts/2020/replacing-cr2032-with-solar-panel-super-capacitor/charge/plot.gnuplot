@@ -6,7 +6,7 @@ set format x "%H:%M"
 set timefmt "%H:%M"
 
 show style line
-set ylabel 'Supercapacitor Voltage'
+set ylabel 'Super Capacitor Voltage'
 set xlabel 'Minutes/Seconds after Connect'
 
 set style line 1 lt rgb "blue" lw 1 pt 2
