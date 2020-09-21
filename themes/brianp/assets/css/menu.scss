@@ -1,10 +1,31 @@
-nav {
+.flex-container > nav {
     display: flex;
-    flex-direction: column;
 
     .nav-link {
         font-size: 1.2rem;
-        text-align: right;
-        padding-top: 1rem;
+    }
+}
+
+// Small & Medium Screen
+@media only screen and (max-width: $width-body-lg) {
+    .flex-container > nav {
+        flex-direction: row;
+        justify-content: space-around;
+
+        .nav-link {
+        }
+    }
+}
+
+// Large Screen
+@media only screen and (min-width: $width-body-lg) {
+    .flex-container > nav {
+        flex-direction: column;
+
+        .nav-link {
+            text-align: right;
+            margin: 1rem;
+            margin-top: 0;
+        }
     }
 }

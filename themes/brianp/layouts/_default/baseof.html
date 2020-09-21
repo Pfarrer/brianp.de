@@ -19,16 +19,16 @@
         {{ end }}{{ end }}{{ .Site.Title }}{{ end }}</title>
 </head>
 
-<body class="type-{{ if .IsHome }}home{{ end }}{{ if .IsPage }}single{{ end }}{{ if .IsNode }}list{{ end }}">
+<body class="type-{{ if .IsHome }}home{{ else }}{{ if .IsPage }}single{{ end }}{{ if .IsNode }}list{{ end }}{{ end }}">
     <div class="flex-container">
         <header>
-            {{- partial "header.html" . -}}
+            {{ block "header" . -}}&nbsp;{{ end }}
         </header>
         <nav>
             {{- partial "menu.html" . -}}
         </nav>
         <main>
-            {{- block "main" . }}{{ end }}
+            {{ block "main" . }}{{ end }}
         </main>
         <aside>
             {{ block "aside" . }}{{ end }}

@@ -23,6 +23,11 @@ enableGitInfo = true
 [menu]
 
   [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
     name = "Posts"
     url = "posts/"
     weight = 10
@@ -33,11 +38,11 @@ enableGitInfo = true
     weight = 20
 
   [[menu.main]]
-    name = "Quotes"
-    url = "quotes"
+    name = "Glossary"
+    url = "glossary/"
     weight = 30
 
   [[menu.main]]
-    name = "About"
-    url = "about/"
+    name = "Quotes"
+    url = "quotes"
     weight = 40

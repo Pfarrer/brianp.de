@@ -1,5 +1,5 @@
 +++
-title = "Replacing a CR2032 Battery with a 3 V Solar Panel and a Super Capacitor"
+title = "Replacing a Battery with a Solar Panel and a Super Capacitor"
 date = "2020-08-03"
 tags = [
     "CR2032",
@@ -14,7 +14,7 @@ draft = true
 CR2032 batteries usually power devices with very low energy requirements. A typical use-case for such a battery is, keeping an internal clock active even if the main power supply is not available. The device will be able to maintain the correct date and time even when turned off and not connected to any other power source. An example device that makes use of this is, a common mainboard - an essential part of every computer.
 
 The device I selected to equip with a solar-powered circuit instead of the build-in CR2032 battery is the Mi Flora plant sensor.
-It is powered by a single CR2032 battery which lasts at least 6 months when the sensor is used once every 10 minutes. See my other post on +++<a href="{{< ref "plant-monitoring-xiaomi-miflora-rasperrypi-grafana" >}}" target="_blank">Mi Flora based plant monitoring</a>+++.
+It is powered by a single CR2032 battery which lasts at least 6 months when the sensor is used once every 10 minutes. See my other post on <a href="{{< ref "plant-monitoring-xiaomi-miflora-rasperrypi-grafana" >}}" target="_blank">Mi Flora based plant monitoring</a>.
 
 ## Buffer
 
@@ -24,11 +24,10 @@ To prevent the super capacitor from discharging through the connected solar cell
 
 The following image shows the charging curve of the super capacitor in direct sunlight. I had to stop the measurement after about 4 minutes since a few clouds blocked the direct sunlight. Nevertheless, the conclusion of this curve is that it takes only about 5 minutes to charge the super capacitor to capacity.
 
-image:charge/plot.png[]
+![Charging curve of the super capacitor in direct sunlight](charge/plot.png)
 
 ## Regulator
 
-image:discharge/plot.png[]
+![Discharging curve of the super capacitor](discharge/plot.png)
 
-
-image:circuit/circuit.jpg[]
+![Circuit diagram](circuit/circuit.jpg)

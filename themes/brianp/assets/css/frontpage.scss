@@ -1,0 +1,32 @@
+.type-home {
+    
+    img.profile-image {
+        display: block;
+        margin: auto;
+        
+        border: 2px solid white;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px black;
+    }
+
+    h2 {
+
+    }
+
+    .tag-cloud {
+        display: inline;
+        list-style-type: none;
+        
+        li {
+            list-style: none;
+            display: inline;
+            margin: 0.1em;
+        }
+    }
+
+    .inline-icon {
+        background-color: white;
+        border-radius: 10%;
+        padding: 1%;
+    }
+}

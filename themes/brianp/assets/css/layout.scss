@@ -1,8 +1,10 @@
-$width-body-lg: 960px;
-$width-body-sm: 800px;
 $width-main-lg: 640px;
-$width-nav-lg: 160px;
-$width-aside-lg: 160px;
+$width-nav-lg: 140px;
+$width-aside-lg: 140px;
+$width-margin: 40px;
+
+$width-body-lg: $width-main-lg + $width-nav-lg + $width-aside-lg + 2 * $width-margin;
+$width-body-sm: $width-main-lg + $width-nav-lg + 1 * $width-margin;
 
 body {
     display: flex;
@@ -17,67 +19,65 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
 
+    width: $width-body-lg;
     max-width: $width-body-lg;
-    background-color: $color-bg;
 
-    // header {
-    //     background-color: yellowgreen;
-    // }
-    // nav {
-    //     background-color: turquoise;
-    // }
-    // aside {
-    //     background-color: darkgoldenrod;
-    // }
-    // main {
-    //     background-color: royalblue;
-    // }
-    // footer {
-    //     background-color: rebeccapurple;
-    // }
-
-    main {
-        h1, h2, h3 {
-            margin: 1rem;
+    main, aside {
+        :first-child {
+            margin-top: 0;
         }
-        p {
-            margin: 2rem;
-            
-            img {
-                margin: 0 -2rem;
-                width: $width-main-lg;
+    }
+}
+
+// Small Screen
+@media only screen and (max-width: $width-body-sm) {
+    .flex-container {
+        > nav, main, header, aside, footer {
+            flex: 0 0 100%;
+        }
+    }
+}
+
+// Medium Screen
+@media only screen and (min-width: $width-body-sm) and (max-width: $width-body-lg) {
+    .flex-container {
+        justify-content: space-around;
+
+        aside {
+            flex: 0 0 $width-nav-lg;
+        }
+        main {
+            flex: 0 0 $width-main-lg;
+
+            > * {
+                max-width: $width-main-lg;
+                overflow-x: auto;
             }
         }
+        header, > nav, footer {
+            flex: 0 0 100%;
+        }
     }
 }
 
-@media only screen and (max-width: $width-body-sm) {
-    nav, main, header, aside, footer {
-        flex: 0 0 100%;
-    }
-}
-
-
-@media only screen and (min-width: $width-body-sm) and (max-width: $width-body-lg) {
-    nav {
-        flex: 1 0 $width-nav-lg;
-    }
-    main {
-        flex: 0 0 $width-main-lg;
-    }
-    header, aside, footer {
-        flex: 0 0 100%;
-    }
-}
-
+// Large Screen
 @media only screen and (min-width: $width-body-lg) {
-    nav, aside {
-        flex: 1 0 $width-nav-lg;
-    }
-    main {
-        flex: 0 0 $width-main-lg;
-    }
-    header, footer {
-        flex: 0 0 100%;
+    .flex-container {
+        justify-content: space-between;
+
+        > nav, aside {
+            flex: 0 0 $width-nav-lg;
+        }
+        main {
+            flex: 0 0 $width-main-lg;
+
+            > * {
+                max-width: $width-main-lg;
+                overflow-x: auto;
+            }
+        }
+        header, footer {
+            flex: 0 0 100%;
+        }
     }
 }

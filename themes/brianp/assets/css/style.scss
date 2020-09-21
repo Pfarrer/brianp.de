@@ -1,35 +1,35 @@
-@import "colors.scss";
+@import "_colors.scss";
 @import "layout.scss";
 @import "menu.scss";
+@import "frontpage.scss";
 
 body {
     background-color: $color-bg;
-    color: #f4f4f4;
+    color: $color-text;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 a {
-    color: #f4f4f4;
-    text-decoration: none;
-
-    border-bottom: 1px solid $color-highlight;
-    margin-bottom: 3px;
+    color: $color-highlight;
+    text-decoration: underline;
     transition: 0.2s;
 }
 a:hover {
-    border-bottom: 4px solid $color-highlight;
-    margin-bottom: 0;
 }
 
 header {
     color: $color-highlight;
-    font-size: 4rem;
-    padding: 1rem;
+    font-size: 2rem;
+
+    h1 {
+        border-bottom: 1px solid $color-highlight;
+    }
 }
 
 pre {
     padding: 1em;
 }
 
-.tag-cloud .tag {
-    margin: 0.1em;
+.center {
+    text-align: center;
 }

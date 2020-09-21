@@ -1,5 +1,8 @@
-{{ define "main" }}
+{{ define "header" }}
 <h1>{{ .Title }}</h1>
+{{ end }}
+
+{{ define "main" }}
 {{ .Content }}
 {{ end }}
 
@@ -11,9 +14,13 @@
 <h3>Tags</h3>
 
 {{- with .Params.tags }}
-{{- range . -}}
-<span class="tag"><a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a></span><br>
-{{- end }}
+<ul class="tag">
+    {{- range . -}}
+    <li>
+        <a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a>
+    </li>
+    {{- end }}
+</ul>
 {{- end }}
 
 <h3>Info</h3>
