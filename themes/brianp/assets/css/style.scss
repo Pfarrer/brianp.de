@@ -1,6 +1,7 @@
 @import "_colors.scss";
 @import "layout.scss";
 @import "menu.scss";
+@import "list.scss";
 @import "frontpage.scss";
 
 body {
@@ -14,20 +15,21 @@ a {
     text-decoration: underline;
     transition: 0.2s;
 }
-a:hover {
-}
 
 header {
     color: $color-highlight;
     font-size: 2rem;
+    padding: 1em 0;
 
     h1 {
+        margin: 0;
         border-bottom: 1px solid $color-highlight;
     }
 }
 
 pre {
     padding: 1em;
+    white-space: pre-wrap;
 }
 
 .center {

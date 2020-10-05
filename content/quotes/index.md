@@ -1,5 +1,6 @@
 +++
 title = "Quotes"
+type = "quotes"
 +++
 
 _"The trick is to fix the problem you have, rather than the problem you want._"

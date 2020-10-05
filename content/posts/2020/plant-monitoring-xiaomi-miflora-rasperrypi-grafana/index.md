@@ -18,11 +18,12 @@ tags = [
 
 {{< load-photoswipe >}}
 
-In the following article, I am going to describe my motivation for automated plant monitoring and I will explain my final system and results in detail.
+In this article, I am going to describe my motivation for building an automated plant monitoring and I will explain my final system and results in detail.
+<!--more-->
 
-If you do not care about the details, jump straight to the <<Results>>.
+If you do not care about the details, jump straight to the [results](#Results).
 
-== Hardware
+## Hardware
 
 Xiaomi offers a simple and cheap flower sensor that can measure 4 different properties of a plant:
 
@@ -163,7 +164,7 @@ volumes:
 
 Do not forget to set proper passwords!
 
-## Results
+## Results {#Results}
 
 At the time of writing this, the described setup is active for about 60 consecutive days without interruption: 3 sensors that are queried every 10 minutes to retrieve 5 numeric properties per sensor: temperature, light, moisture, conductivity, and battery level. The three plants I selected for monitoring are:
 

@@ -1,10 +1,11 @@
 +++
 title = "Domain Driven Design"
+summary = "Collection of relevant terms and keywords about Domain Driven Design."
 tags = [
     "domain",
+    "design",
     "ddd",
 ]
-draft = true
 +++
 
 ## Aggregate
@@ -50,7 +51,7 @@ In general, there should be one repository per aggregate.
 ## Domain Events
 An instance of a special class that captures the occurrence of an event.
 
-The name of an event should be **part of the ubiquitous language**. A **stakeholder should understand what the event is about when reading its name**. Events should be business related, not technical.
+The name of an event should be **part of the ubiquitous language**. A **stakeholder should understand what the event is about when reading its name**. Events should be business-related, not technical.
 
 Such an event describes the past, something that is completed.
 
@@ -59,7 +60,7 @@ Events can cross layers, for instance, an event issued in the core layer can als
 When events need to cross-domain boundaries, translate the event into a special cross-domain event type, and raise that to external domains. (Internal) domain events should not be propagated to other domains since the information transported by the event does only make sense within the domain. Cross-domain events encapsulate possibly more or different information to make sense to other domains.
 
 ## Hollywood Principle
-"Don't call use, we'll call you." - Use domain events to decouple features from the business code. 
+"Don't call us, we'll call you." - Use domain events to decouple features from the business code. 
 
 > Example: When creating an appointment, sending an email confirmation is not part of the core logic. The core logic could emit an `AppointmentCreated` event that is received by an `AppointmentNotificationService` which might send the email.
 

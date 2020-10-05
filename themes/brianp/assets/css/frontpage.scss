@@ -1,26 +1,32 @@
 .type-home {
     
-    img.profile-image {
-        display: block;
-        margin: auto;
-        
-        border: 2px solid white;
-        border-radius: 50%;
-        box-shadow: 0 2px 5px black;
+    header {
+        img.profile-image {
+            display: block;
+            margin: auto;
+            
+            border: 2px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px black;
+        }
     }
 
-    h2 {
-
+    main {
+        text-align: center;
     }
 
     .tag-cloud {
-        display: inline;
-        list-style-type: none;
-        
-        li {
-            list-style: none;
-            display: inline;
-            margin: 0.1em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+
+        padding-top: 4em;
+        padding-bottom: 1em;
+
+        .tag {
+            margin: 0.2em;
         }
     }
 

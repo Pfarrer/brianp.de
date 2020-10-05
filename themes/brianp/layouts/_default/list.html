@@ -1,19 +1,20 @@
-{{ define "header" }}
-<h1>{{ .Title }}</h1>
-{{ end }}
-
 {{ define "main" }}
 {{- range .Data.Pages.GroupByDate "2006" }}
 
-<div class="post-group">
+<div class="list-group">
     <h2>{{ .Key }}</h2>
-    <ul class="posts-list">
+    <ul class="list">
         {{- range .Pages }}
-        <li class="post-item">
+        <li class="item">
 
-            <a href="{{.Permalink}}" class="post-title">{{.Title}}</a>
-            <p class="teaser">{{.Summary}}</p>
+            <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+            <p class="summary">{{ .Summary }}</p>
 
+            <div class="tags">
+                {{- range .Params.tags }}
+                <span class="tag">{{ . }}</span>
+                {{- end }}
+            </div>
         </li>
         {{- end }}
     </ul>

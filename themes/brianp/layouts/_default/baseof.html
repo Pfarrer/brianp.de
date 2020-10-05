@@ -22,7 +22,9 @@
 <body class="type-{{ if .IsHome }}home{{ else }}{{ if .IsPage }}single{{ end }}{{ if .IsNode }}list{{ end }}{{ end }}">
     <div class="flex-container">
         <header>
-            {{ block "header" . -}}&nbsp;{{ end }}
+            {{ block "header" . -}}
+            <h1>{{ .Title }}</h1>
+            {{ end }}
         </header>
         <nav>
             {{- partial "menu.html" . -}}
