@@ -6,15 +6,8 @@
     <ul class="list">
         {{- range .Pages }}
         <li class="item">
-
             <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
-            <p class="summary">{{ .Summary }}</p>
-
-            <div class="tags">
-                {{- range .Params.tags }}
-                <span class="tag">{{ . }}</span>
-                {{- end }}
-            </div>
+            <p class="summary">{{ .Summary | plainify }}</p>
         </li>
         {{- end }}
     </ul>

@@ -1,0 +1,19 @@
+{{ if gt .Date.Unix 0 }}
+<span class="post-day">Published: {{ .Date.Format .Site.Params.dateform }}</span>
+{{ end }}
+
+{{ if .Params.toc }}
+<h3>Contents</h3>
+{{ .TableOfContents }}
+{{ end }}
+
+<h3>Tags</h3>
+{{- with .Params.tags }}
+<ul class="tag">
+    {{- range . -}}
+    <li>
+        <a href="{{ " tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a>
+    </li>
+    {{- end }}
+</ul>
+{{- end }}

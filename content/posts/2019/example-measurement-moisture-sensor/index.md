@@ -7,10 +7,13 @@ tags = [
     "smarthome",
     "iot",
 ]
-date = "2020-06-02"
+date = "2019-08-02"
 +++
 
-To understand how the capacitive soil moisture sensor reacts to changes and to have a basic idea how real values look like, I ran a measurement of a small Basil plant. Approximately every second, a measurement was taken using a sensor labeled "Capacitive Soil Moisture Sensor V1.2". The plant was protected from direct sunlight and other external influences.
+To understand how the capacitive soil moisture sensor reacts to changes and to have a basic idea how real values look like, I ran a measurement of a small Basil plant.
+<!--more-->
+
+Approximately every second, a measurement was taken using a sensor labeled "Capacitive Soil Moisture Sensor V1.2". The plant was protected from direct sunlight and other external influences.
 
 To measure these values, I used an Attiny85 with its ADC set to 10 bit mode, thus, the value range is 0 - 1023.
 

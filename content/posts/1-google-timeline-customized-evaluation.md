@@ -13,6 +13,7 @@ tags = [
     "kibana",
     "docker",
 ]
+toc = true
 draft = true
 +++
 

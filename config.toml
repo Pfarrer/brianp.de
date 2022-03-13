@@ -19,6 +19,10 @@ enableGitInfo = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
 
 [menu]
 
@@ -38,11 +42,6 @@ enableGitInfo = true
 #    weight = 20
 
   [[menu.main]]
-    name = "Glossary"
-    url = "glossary/"
-    weight = 30
-
-  [[menu.main]]
     name = "Quotes"
     url = "quotes"
-    weight = 40
+    weight = 30

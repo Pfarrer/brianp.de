@@ -1,11 +1,14 @@
 +++
-title = "Domain Driven Design"
+title = "Domain Driven Design - Glossary"
 summary = "Collection of relevant terms and keywords about Domain Driven Design."
+date = "2020-10-04"
 tags = [
     "domain",
     "design",
     "ddd",
+    "glossary",
 ]
+toc = true
 +++
 
 ## Aggregate
@@ -44,16 +47,14 @@ Interrelated values of interest in a specific domain of knowledge.
 > Example: An address consists of at least a street, house number, zip code, and city. The house number alone does not make any sense. Combined, all these values describe a precise address and can be treated as an *address* entity.
 
 ## Repository
-A class that encapsulates the data **persistence for an [aggregate](#aggregate)**. It should not work on individual entities of an aggregate but rather on the aggregate as a whole.
+A class that encapsulates the data persistence for an [aggregate](#aggregate). It should not work on individual entities of an aggregate but rather on the aggregate as a whole.
 
 In general, there should be one repository per aggregate.
 
 ## Domain Events
-An instance of a special class that captures the occurrence of an event.
+An instance of a special class that captures the occurrence of an event. Such an event describes the past, something that is completed. The name of an event should be **part of the ubiquitous language**.
 
-The name of an event should be **part of the ubiquitous language**. A **stakeholder should understand what the event is about when reading its name**. Events should be business-related, not technical.
-
-Such an event describes the past, something that is completed.
+Events should be business-related, not technical. A stakeholder should understand what the event is about when reading its name.
 
 Events can cross layers, for instance, an event issued in the core layer can also be caught by the UI layer (e.g. to show a notification).
 

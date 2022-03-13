@@ -1,18 +1,25 @@
 body.type-list {
+    h2 {
+        border-bottom: 1px solid $color-text;
+    }
+
     ul.list {
+        list-style: none;
+        padding: 0;
+
         li.item {
             padding: 1em 0;
+
+            a.title {
+                font-size: 1.2em;
+            }
 
             p {
                 margin-bottom: 0;
             }
         }
-    }
-
-    .tag {
-        background-color: rgb(87, 87, 87);
-        padding: 0.2em 0.3em;
-        font-size: 0.8rem;
-        border-radius: 5%;
+        li:first-child {
+            padding-top: 0;
+        }
     }
 }

@@ -1,3 +1,5 @@
 resources/
 public/
 .DS_Store
+backstop_data/html_report/
+backstop_data/bitmaps_test/

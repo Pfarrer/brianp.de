@@ -1,16 +1,9 @@
 {{ define "main" }}
-<ul class="posts-list">
+<ul class="list">
     {{- range .Pages }}
-    <li class="post-item">
-
-        <a class="post-title" href="{{ .Permalink }}">{{ .Title }}</a>
+    <li class="item">
+        <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
         <p class="summary">{{ .Summary }}</p>
-
-        <div class="tags">
-            {{- range .Params.tags }}
-            <a class="tag">{{ . }}</a>
-            {{- end }}
-        </div>
     </li>
     {{- end }}
 </ul>

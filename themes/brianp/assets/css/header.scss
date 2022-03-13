@@ -1,0 +1,33 @@
+// Small & Medium Screen
+@media only screen and (max-width: $width-body-lg) {
+    header {
+        color: $color-highlight;
+        font-size: 2rem;
+        padding: 1em 0;
+    
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            padding: 0.1em 0.2em;
+        }
+    }
+    
+}
+
+// Large Screen
+@media only screen and (min-width: $width-body-lg) {
+    header {
+        color: $color-highlight;
+        font-size: 2rem;
+        padding: 1em 0;
+    
+        h1 {
+            margin: 0;
+            font-size: 4rem;
+            background-color: $color-highlight;
+            color: $color-bg;
+            padding: 0.1em 0.2em;
+        }
+    }
+    
+}

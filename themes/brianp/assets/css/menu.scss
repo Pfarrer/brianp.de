@@ -1,28 +1,48 @@
 .flex-container > nav {
-    display: flex;
-
-    .nav-link {
-        font-size: 1.2rem;
+    input#show-links {
+        display: none;
     }
 }
 
 // Small & Medium Screen
 @media only screen and (max-width: $width-body-lg) {
     .flex-container > nav {
-        flex-direction: row;
-        justify-content: space-around;
+        order: -1;
+        background-color: $color-highlight;
+        color: $color-bg;
+
+        label[for="show-links"] {
+            padding: 1em;
+            display: block;
+            cursor: pointer;
+        }
+        #show-links:checked ~ .nav-link {
+            display: block;
+        }
+        .nav-link {
+            display: none;
+
+            border-top: 1px solid $color-bg;
+            padding: 1em;
+            color: $color-bg;
+        }
     }
 }
 
 // Large Screen
 @media only screen and (min-width: $width-body-lg) {
     .flex-container > nav {
+        display: flex;
         flex-direction: column;
 
         .nav-link {
+            font-size: 1.2rem;
             text-align: right;
             margin: 1rem;
             margin-top: 0;
+        }
+        label[for="show-links"] {
+            display: none;
         }
     }
 }

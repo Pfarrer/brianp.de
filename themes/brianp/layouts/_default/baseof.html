@@ -39,6 +39,14 @@
             {{- partial "footer.html" . -}}
         </footer>
     </div>
+
+    {{ if .Params.photoswipe }}
+    {{- partial "load-photoswipe.html" . -}}
+    {{ end }}
+
+    {{- if not .Site.IsServer }}
+    <script data-goatcounter="https://brianp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    {{- end }}
 </body>
 
 </html>

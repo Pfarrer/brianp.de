@@ -1,6 +1,6 @@
 # Hi, I’m Brian Pfretzschner
 
-Software Developer, Admin and Electronics Enthusiast
+Software Developer, Admin, Electronics Enthusiast, Cyclist, and more
 
 {{< link-blank href="https://github.com/Pfarrer" >}}
 <img class="inline-icon" src="logos/github.png" alt="Github">

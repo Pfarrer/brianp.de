@@ -7,8 +7,11 @@ tags = [
 ]
 +++
 
-If you have to sort a associative array in a very specific order that cannot be described easily with a lambda,
-PHP's sort functions do not help a lot. In this example, a second array contains the keys in the required order.
+If you have to sort an associative array in a very specific order that cannot be described easily with a lambda,
+PHP's sort functions do not help a lot.
+<!--more-->
+
+In this example, a second array contains the keys in the required order.
 A nice and easy way to do the same thing with just a few lines of code:
 
 ```js

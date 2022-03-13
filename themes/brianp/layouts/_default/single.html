@@ -3,23 +3,5 @@
 {{ end }}
 
 {{ define "aside" }}
-<h3>Contents</h3>
-
-{{ .TableOfContents }}
-
-<h3>Tags</h3>
-
-{{- with .Params.tags }}
-<ul class="tag">
-    {{- range . -}}
-    <li>
-        <a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a>
-    </li>
-    {{- end }}
-</ul>
-{{- end }}
-
-<h3>Info</h3>
-
-<span class="post-day">Published: {{ .Date.Format .Site.Params.dateform }}</span>
+{{- partial "aside.html" . -}}
 {{ end }}

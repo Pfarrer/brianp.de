@@ -1,8 +1,11 @@
 @import "_colors.scss";
 @import "layout.scss";
+@import "header.scss";
 @import "menu.scss";
 @import "list.scss";
+@import "aside.scss";
 @import "frontpage.scss";
+@import "quotes.scss";
 
 body {
     background-color: $color-bg;
@@ -16,22 +19,20 @@ a {
     transition: 0.2s;
 }
 
-header {
-    color: $color-highlight;
-    font-size: 2rem;
-    padding: 1em 0;
-
-    h1 {
-        margin: 0;
-        border-bottom: 1px solid $color-highlight;
-    }
+h2, h3 {
+    background-color: $color-text;
+    color: $color-bg;
+    padding: 0.1em 0.4em;
 }
 
 pre {
-    padding: 1em;
     white-space: pre-wrap;
 }
 
 .center {
     text-align: center;
+}
+
+img {
+    max-width: 100%;
 }

@@ -13,6 +13,12 @@
 
     main {
         text-align: center;
+
+        h1 {
+            background-color: $color-text;
+            color: $color-bg;
+            padding: 0.1em 0.2em;
+        }
     }
 
     .tag-cloud {

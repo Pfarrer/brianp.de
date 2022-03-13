@@ -23,7 +23,9 @@ body {
     max-width: $width-body-lg;
 
     main, aside {
-        :first-child {
+        :first-child,
+        p:first-of-type,
+        h2:first-of-type {
             margin-top: 0;
         }
     }
