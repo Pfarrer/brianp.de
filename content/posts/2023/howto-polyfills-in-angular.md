@@ -11,8 +11,7 @@ tags = [
 Angular CLI based projects support polyfills. Here are the steps required to set them up on a newly created project which does not contain them so far:
 <!--more-->
 
-
-1) Create `polyfills.ts` file (file name can be choosen freely)
+1) Create `src/polyfills.ts` file (file name can be choosen freely)
 2) Include the file in the `tsconfig.app.ts` and `tsconfig.spec.ts` configs, e.g.
 
     ```json {hl_lines=[5]}
@@ -53,4 +52,4 @@ Angular CLI based projects support polyfills. Here are the steps required to set
     }
     ```
 
-Those changes did the trick for me. Any code located in the `polyfills.ts` file was included in the transpiled code and executed prior to any other application code.
+Those changes did the trick for me. Any code located in the `polyfills.ts` file was included in the transpiled code and added prior to any other application code.
