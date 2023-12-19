@@ -1,0 +1,13 @@
++++
+title = "A naive Java JVM in Rust"
+tags = [
+    "java",
+    "jvm",
+    "classfile",
+    "bytecode",
+    "interpreter",
+    "rust",
+]
+date = "2022-02-06"
++++
+
