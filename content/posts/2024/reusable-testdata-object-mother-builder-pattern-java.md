@@ -58,7 +58,6 @@ Lets use this example domain models to demonstrate the advantages. Keep in mind 
 record Order(
     List<OrderItem> orderItems,
     BigDecimal discount,
-    OrderStatus status,
     Address shippingAddress,
     Address invoiceAddress
 ) {}
@@ -69,13 +68,6 @@ record OrderItem(
     int[] dimensionsCm,
     BigDecimal price
 ) {}
-
-enum OrderStatus {
-    NEW,
-    SHIPPING,
-    PAYMENT_PENDING,
-    COMPLETE
-}
 
 @Builder(toBuilder = true)
 record Address(
@@ -101,7 +93,8 @@ class OrderObjectMother {
     private final Order.OrderBuilder builder;
 
     public static OrderObjectMother randomized() {
-        return new OrderObjectMother(Instancio.of(Order.class).create().toBuilder());
+        return new OrderObjectMother(
+            Instancio.of(Order.class).create().toBuilder());
     }
 
     public OrderObjectMother discount(String val) {
@@ -109,7 +102,8 @@ class OrderObjectMother {
     }
 
     public OrderObjectMother sameAddresses() {
-        return new OrderObjectMother(builder.invoiceAddress(builder.build().shippingAddress()));
+        return new OrderObjectMother(
+            builder.invoiceAddress(builder.build().shippingAddress()));
     }
 
     public Order.OrderBuilder and() {
@@ -127,7 +121,8 @@ class OrderItemObjectMother {
     private final OrderItem.OrderItemBuilder builder;
 
     public static OrderItemObjectMother randomized() {
-        return new OrderItemObjectMother(Instancio.of(OrderItem.class).create().toBuilder());
+        return new OrderItemObjectMother(
+            Instancio.of(OrderItem.class).create().toBuilder());
     }
 
     public OrderItemObjectMother price(String val) {
@@ -146,19 +141,20 @@ class OrderItemObjectMother {
 @RequiredArgsConstructor
 class AddressObjectMother {
 
-  private final Address.AddressBuilder builder;
+    private final Address.AddressBuilder builder;
 
-  public static AddressObjectMother randomized() {
-    return new AddressObjectMother(Instancio.of(Address.class).create().toBuilder());
-  }
+    public static AddressObjectMother randomized() {
+      return new AddressObjectMother(
+          Instancio.of(Address.class).create().toBuilder());
+    }
 
-  public Address.AddressBuilder and() {
-    return builder;
-  }
+    public Address.AddressBuilder and() {
+      return builder;
+    }
 
-  public Address build() {
-    return builder.build();
-  }
+    public Address build() {
+      return builder.build();
+    }
 }
 ```
 
