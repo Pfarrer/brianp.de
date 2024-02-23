@@ -2,7 +2,8 @@
 title = "Reusable Test Data with Object Mother and Builder Pattern in Java"
 date = "2024-02-22"
 tags = [
-    "test data",
+    "test",
+    "testdata",
     "pattern",
     "builder",
     "java",
