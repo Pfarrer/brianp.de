@@ -40,17 +40,18 @@ const id = ''+process.hrtime()[1];
 <a href="#" id={id} data-href={obfuscatedHref} data-text={obfuscatedText}>[hidden]</a>
 
 <script define:vars={{ id, obfuscatedHref, obfuscatedText }}>
- function reverseStr(str) {
-    return str.split('').reverse().join('');
+function reverseStr(str) {
+  return str.split('').reverse().join('');
+}
+
+new IntersectionObserver((entries, observer) => {
+  if (entries[0].isIntersecting) {
+    const el = entries[0].target;
+    el.href = atob(reverseStr(el.attributes['data-href'].value));
+    el.innerHTML = atob(reverseStr(el.attributes['data-text'].value));
+    observer.disconnect();
   }
-  new IntersectionObserver((entries, observer) => {
-    if (entries[0].isIntersecting) {
-      const el = entries[0].target;
-      el.href = atob(reverseStr(el.attributes['data-href'].value));
-      el.innerHTML = atob(reverseStr(el.attributes['data-text'].value));
-      observer.disconnect();
-    }
-  }).observe(document.getElementById(id));
+}).observe(document.getElementById(id));
 </script>
 ```
 
@@ -66,6 +67,16 @@ import ObfuscatedLink from '../components/ObfuscatedLink.astro';
 <p>
   Contact me via:
   <ObfuscatedLink href="mailto:mail@example.com">mail@example.com</ObfuscatedLink>
+</p>
+```
+
+Astro will generate the following HTML code:
+
+```html
+<p>
+  Contact me via:
+  <a href="#" id="239889741" data-href="=02bj5SZsBXbhhXZAxWah1mOvRHbpFWb" data-text="==QbvNmLlxGctFGelBEbpFWb">[hidden]</a>
+  <script>[...]</script>
 </p>
 ```
 
