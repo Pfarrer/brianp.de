@@ -23,32 +23,33 @@ This is the code for the reusable component located in `src/components/Obfuscate
 ---
 type Props = {
   href: string;
-  text: string;
 };
 
-const { href, text } = Astro.props;
+const { href } = Astro.props;
 
-function reverseStr(str) {
+function reverseStr(str: string) {
   return str.split('').reverse().join('');
 }
 
-const obfuscatedHref = reverseStr(btoa(href));
-const obfuscatedText = reverseStr(btoa(await Astro.slots.render('default')));
 const id = ''+process.hrtime()[1];
+
+const obfuscatedHref = reverseStr(Buffer.from(href).toString('base64'));
+
+const text = await Astro.slots.render('default');
+const obfuscatedText = reverseStr(Buffer.from(text).toString('base64'));
 ---
 
 <a href="#" id={id} data-href={obfuscatedHref} data-text={obfuscatedText}>[hidden]</a>
 
-<script define:vars={{ id, obfuscatedHref, obfuscatedText }}>
+<script is:inline define:vars={{ id, obfuscatedHref, obfuscatedText }}>
 function reverseStr(str) {
   return str.split('').reverse().join('');
 }
-
 new IntersectionObserver((entries, observer) => {
   if (entries[0].isIntersecting) {
     const el = entries[0].target;
-    el.href = atob(reverseStr(el.attributes['data-href'].value));
-    el.innerHTML = atob(reverseStr(el.attributes['data-text'].value));
+    el.href = window.atob(reverseStr(el.attributes['data-href'].value));
+    el.innerHTML = window.atob(reverseStr(el.attributes['data-text'].value));
     observer.disconnect();
   }
 }).observe(document.getElementById(id));
