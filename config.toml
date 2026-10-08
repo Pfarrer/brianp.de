@@ -1,9 +1,11 @@
 baseURL = "https://brianp.de/"
-languageCode = "en-us"
 title = "Brian Pfretzschner"
 theme = "brianp"
 enableEmoji = true
 enableGitInfo = true
+
+[Language]
+  Locale = "en-us"
 
 [author]
   name = "Brian Pfretzschner"
