@@ -11,8 +11,7 @@
     {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
 
-    {{ $styleScss := resources.Get "css/style.scss" -}}
-    {{ $style := $styleScss | resources.ToCSS }}
+    {{ $style := resources.Get "css/style.css" -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
 
     <title>{{ block "title" . }}{{ if not .IsHome }}{{ with .Title }}{{ . }} |
@@ -44,7 +43,7 @@
     {{- partial "load-photoswipe.html" . -}}
     {{ end }}
 
-    {{- if not .Site.IsServer }}
+    {{- if not hugo.IsServer }}
     <script data-goatcounter="https://brianp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     {{- end }}
 </body>
