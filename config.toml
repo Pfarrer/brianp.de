@@ -25,6 +25,7 @@ enableGitInfo = true
     codeFences = true
     guessSyntax = true
     lineNos = true
+    lineNumbersInTable = false
 
 [menu]
 
